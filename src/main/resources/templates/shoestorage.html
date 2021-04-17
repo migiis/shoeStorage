@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+<title>Shoe Storage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+	<div><h1>Shoe Storage</h1></div>
+	
+	<div><h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1></div>
+	
+	<div><form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out"/>
+	</form></div>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Brand</th>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Size</th>
+				<th>Price</th>
+				<th>Type</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="shoe : ${shoes}">
+				<td th:text="${shoe.brand}"></td>
+				<td th:text="${shoe.name}"></td>
+				<td th:text="${shoe.gender}"></td>
+				<td th:text="${shoe.size}"></td>
+				<td th:text="${shoe.price}"></td>
+				<td th:text="${shoe.type.typename}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')">
+					<a class="btn btn-danger" 
+					th:href="@{/delete/{id}(id=${shoe.id})}">Delete</a></td>
+				<td><a class="btn btn-primary"
+					th:href="@{/edit/{id}(id=${shoe.id})}">Edit</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a class="btn btn-success" href="/add">Add Shoes</a>
+	
+</body>
+</html>
