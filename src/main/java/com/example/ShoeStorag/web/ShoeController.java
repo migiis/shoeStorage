@@ -40,7 +40,7 @@ public class ShoeController {
         return "login";
     }
 	
-	@RequestMapping(value={"/", "/shoestorage"})
+	@RequestMapping(value={/*"/",*/ "/shoestorage"})
 	public String shoeStorage(Model model) {
 		
 		/*UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
