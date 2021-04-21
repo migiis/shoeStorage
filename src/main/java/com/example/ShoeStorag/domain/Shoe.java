@@ -11,12 +11,16 @@ import javax.persistence.ManyToOne;
 public class Shoe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private long shoeid;
 	private String brand;
 	private String name;
 	private String gender;
 	private String size;
 	private String price;
+	
+	/*@ManyToOne
+	@JoinColumn(name = "id")
+	private User user;*/
 	
 	@ManyToOne
 	@JoinColumn(name = "typeid")
@@ -26,7 +30,7 @@ public class Shoe {
 		
 	}
 	
-	public Shoe(String brand, String name, String gender, String size, String price, Type type) {
+	public Shoe(String brand, String name, String gender, String size, String price, Type type/*, User user*/) {
 		super();
 		this.brand = brand;
 		this.name = name;
@@ -34,14 +38,15 @@ public class Shoe {
 		this.size = size;
 		this.price = price;
 		this.type = type;
+		//this.user = user;
 	}
 
-	public long getId() {
-		return id;
+	public long getShoeid() {
+		return shoeid;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setShoeid(long shoeid) {
+		this.shoeid = shoeid;
 	}
 	
 	public String getBrand() {
@@ -91,6 +96,14 @@ public class Shoe {
 	public void setType(Type type) {
 		this.type = type;
 	}
+	
+	/*public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}*/
 
 	@Override
 	public String toString() {

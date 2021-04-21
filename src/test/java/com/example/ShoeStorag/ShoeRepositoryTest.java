@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.example.ShoeStorag.domain.Shoe;
 import com.example.ShoeStorag.domain.ShoeRepository;
 import com.example.ShoeStorag.domain.Type;
+import com.example.ShoeStorag.domain.TypeRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -20,6 +21,9 @@ public class ShoeRepositoryTest {
 
 	@Autowired
 	private ShoeRepository repository;
+	
+	@Autowired
+	private TypeRepository trepository;
 	
 	@Test
 	public void findByNameShouldReturnShoe() {
@@ -31,8 +35,8 @@ public class ShoeRepositoryTest {
 	
 	@Test
 	public void createNewShoe() {
-		Shoe shoe = new Shoe("Jordan", "One Take II", "Child", "34", "68 €", new Type ("Basketball"));
+		Shoe shoe = new Shoe("Jordan", "One Take II", "Child", "34", "68 €", trepository.findByTypename("Sneaker").get(0));
 		repository.save(shoe);
-		assertThat(shoe.getId()).isNotNull();
+		assertThat(shoe.getShoeid()).isNotNull();
 	}
 }

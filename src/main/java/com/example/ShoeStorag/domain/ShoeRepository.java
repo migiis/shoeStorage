@@ -9,5 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface ShoeRepository extends CrudRepository<Shoe, Long> {
 	
 	List<Shoe> findByName(@Param("name") String name);
+	//List<Shoe> findByUser(User user);
 }
 

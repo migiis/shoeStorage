@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.ShoeStorag.domain.Shoe;
 import com.example.ShoeStorag.domain.ShoeRepository;
 import com.example.ShoeStorag.domain.TypeRepository;
+import com.example.ShoeStorag.domain.User;
+import com.example.ShoeStorag.domain.UserRepository;
 
 @Controller
 public class ShoeController {
@@ -28,13 +32,22 @@ public class ShoeController {
 	@Autowired
 	private TypeRepository trepository;
 	
+	@Autowired
+	private UserRepository urepository;
+	
 	@RequestMapping(value="/login")
     public String login() {	
         return "login";
     }
 	
-	@RequestMapping(value= "/shoestorage")
+	@RequestMapping(value={"/", "/shoestorage"})
 	public String shoeStorage(Model model) {
+		
+		/*UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = user.getUsername();
+		User userNow = urepository.findByUsername(username);
+		model.addAttribute("shoes", repository.findByUser(userNow));*/
+		
 		model.addAttribute("shoes", repository.findAll());
 		return "shoestorage";
 	}

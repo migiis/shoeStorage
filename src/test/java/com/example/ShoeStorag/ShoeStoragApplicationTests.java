@@ -12,7 +12,7 @@ import com.example.ShoeStorag.web.ShoeController;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ShoeStorageApplicationTests {
+class ShoeStoragApplicationTests {
 	
 	@Autowired
 	private ShoeController controller;
@@ -21,5 +21,4 @@ class ShoeStorageApplicationTests {
 	void contextLoads() throws Exception {
 		assertThat(controller).isNotNull();
 	}
-
 }

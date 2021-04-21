@@ -38,9 +38,9 @@
 				<td th:text="${shoe.type.typename}"></td>
 				<td sec:authorize="hasAuthority('ADMIN')">
 					<a class="btn btn-danger" 
-					th:href="@{/delete/{id}(id=${shoe.id})}">Delete</a></td>
+					th:href="@{/delete/{id}(id=${shoe.shoeid})}">Delete</a></td>
 				<td><a class="btn btn-primary"
-					th:href="@{/edit/{id}(id=${shoe.id})}">Edit</a></td>
+					th:href="@{/edit/{id}(id=${shoe.shoeid})}">Edit</a></td>
 			</tr>
 		</tbody>
 	</table>
