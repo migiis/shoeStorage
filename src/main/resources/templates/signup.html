@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>Sign-up</h1>
+	<h1 class="text-info">Sign up</h1>
      <div class="col-md-4">
 		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<div>
@@ -23,7 +23,7 @@
 				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
 			</div>
 			
-			<input type="submit" class="btn btn-primary" value="Signup"></input>		
+			<input type="submit" class="btn btn-outline-primary" value="Signup"></input>		
 		</form>
 	</div>
 </div>

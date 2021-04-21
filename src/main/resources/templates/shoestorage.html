@@ -6,17 +6,24 @@
 <title>Shoe Storage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
-	<div><h1>Shoe Storage</h1></div>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="text-center text-info display-3">Shoe Storage</h1>
+			<hr class="my-2">
+			<p class="lead" th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</p>
+			<form th:action="@{/logout}" method="post">
+				<input class="btn btn-outline-secondary" type="submit" value="Sign Out"/>
+			</form>
+		</div>
+	</div>
 	
-	<div><h1 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h1></div>
+	<label class="col-md-4"><input class="form-control" id="inputText" type="text" placeholder="Search here.."></label>
 	
-	<div><form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out"/>
-	</form></div>
-	
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Brand</th>
@@ -28,7 +35,7 @@
 			</tr>
 		</thead>
 
-		<tbody>
+		<tbody id="shoeTable">
 			<tr th:each="shoe : ${shoes}">
 				<td th:text="${shoe.brand}"></td>
 				<td th:text="${shoe.name}"></td>
@@ -37,15 +44,26 @@
 				<td th:text="${shoe.price}"></td>
 				<td th:text="${shoe.type.typename}"></td>
 				<td sec:authorize="hasAuthority('ADMIN')">
-					<a class="btn btn-danger" 
+					<a class="btn btn-dark" 
 					th:href="@{/delete/{id}(id=${shoe.shoeid})}">Delete</a></td>
-				<td><a class="btn btn-primary"
+				<td><a class="btn btn-info"
 					th:href="@{/edit/{id}(id=${shoe.shoeid})}">Edit</a></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<a class="btn btn-success" href="/add">Add Shoes</a>
+	<div class="col-md-4"><a class="btn btn-warning" href="/add">Add Shoes</a></div>
+	
+	<script>
+	$(document).ready(function(){
+  		$("#inputText").on("keyup", function() {
+    		var value = $(this).val().toLowerCase();
+    		$("#shoeTable tr").filter(function() {
+      			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    		});
+  		});
+	});
+	</script>
 	
 </body>
 </html>
